@@ -200,10 +200,16 @@
             margin-bottom: 0.5rem;
         }
 
+        .research-sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1rem;
         }
 
         .stat-item {
@@ -442,43 +448,47 @@
                 </p>
                 
                 <div class="research-grid">
-                    <div class="research-content">
-                        <h3>Clinical Research Potential</h3>
-                        <p>
-                            Motor assessment is critical in neurological evaluation, yet traditional methods require specialized equipment 
-                            limiting accessibility. ActionCensus addresses this gap by providing a framework for validated motor assessment through standard webcams.
-                        </p>
-                        <p>
-                            The system is designed to enable research studies that will establish:
-                        </p>
-                        <ul>
-                            <li>Correlation with established clinical finger tapping measures</li>
-                            <li>Test-retest reliability across sessions and devices</li>
-                            <li>Population normative data across age and demographic groups</li>
-                            <li>Sensitivity to motor coordination changes over time</li>
-                        </ul>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-number">21</span>
-                            <div class="stat-label">Hand Landmarks Tracked</div>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">2min</span>
-                            <div class="stat-label">Total Assessment Time</div>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">6</span>
-                            <div class="stat-label">Trials Per Session</div>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">100%</span>
-                            <div class="stat-label">Local Processing</div>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: 2rem; text-align: center;">
-                        <a href="technical.html" class="demo-button">View Technical Details</a>
-                    </div>
+                                    <div class="research-content">
+                                        <h3>Clinical Research Potential</h3>
+                                        <p>
+                                            Motor assessment is critical in neurological evaluation, yet traditional methods require specialized equipment 
+                                            limiting accessibility. ActionCensus addresses this gap by providing a framework for validated motor assessment through standard webcams.
+                                        </p>
+                                        <p>
+                                            The system is designed to enable research studies that will establish:
+                                        </p>
+                                        <ul>
+                                            <li>Correlation with established clinical finger tapping measures</li>
+                                            <li>Test-retest reliability across sessions and devices</li>
+                                            <li>Population normative data across age and demographic groups</li>
+                                            <li>Sensitivity to motor coordination changes over time</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="research-sidebar">
+                                        <div class="stats-grid">
+                                            <div class="stat-item">
+                                                <span class="stat-number">21</span>
+                                                <div class="stat-label">Hand Landmarks Tracked</div>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-number">2min</span>
+                                                <div class="stat-label">Total Assessment Time</div>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-number">6</span>
+                                                <div class="stat-label">Trials Per Session</div>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-number">100%</span>
+                                                <div class="stat-label">Local Processing</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="margin-top: 2rem; text-align: center;">
+                                            <a href="technical.html" class="demo-button">View Technical Details</a>
+                                        </div>
+                                    </div>
                 </div>
             </div>
         </section>
