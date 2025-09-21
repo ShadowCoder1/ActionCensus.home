@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Implementation - ActionCensus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            background-color: #fff;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 3rem 0 2rem 0;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 200;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 0 0 4rem 0;
+            background: #fafafa;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #86868b;
+            margin-bottom: 3rem;
+            text-align: center;
+            line-height: 1.4;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 3rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            position: absolute;
+            top: 3.2rem;
+            left: 3rem;
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* System Overview */
+        .system-overview {
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 3rem;
+            margin: 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-number {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: block;
+            letter-spacing: -0.02em;
+        }
+
+        .metric-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .process-steps-center {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .process-step {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .process-step h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.5rem 0;
+            color: #1d1d1f;
+        }
+
+        .process-step p {
+            font-size: 0.9rem;
+            color: #6c757d;
+            line-height: 1.4;
+        }
+
+        /* Content sections */
+        .content-section {
+            margin: 4rem 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem auto;
+            max-width: 1100px;
+        }
+
+        .algorithm-card {
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 2.5rem;
+        }
+
+        .algorithm-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .algorithm-card p {
+            font-size: 1rem;
+            color: #495057;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .equation {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        /* Detection methods */
+        .detection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .method-card {
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 2rem;
+            border-left: 4px solid #2c3e50;
+        }
+
+        .method-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .method-card p {
+            font-size: 1rem;
+            color: #495057;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        /* Clinical metrics */
+        .clinical-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .clinical-card {
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .clinical-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1d1d1f;
+        }
+
+        .clinical-card p {
+            font-size: 1rem;
+            color: #495057;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1565c0;
+        }
+
+        .info-box p {
+            font-size: 1rem;
+            color: #1976d2;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .two-column, .detection-grid, .clinical-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .process-steps-center {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .process-steps, .process-steps-center, .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+
+            .back-button {
+                position: static;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">ActionCensus</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#research">Research</a></li>
+                    <li><a href="index.html#compatibility">Compatibility</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Technical Implementation</h1>
+            <p class="hero-subtitle">
+                Advanced computer vision and signal processing algorithms enable precise motor assessment through standard webcams
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container" style="position: relative;">
+            <a href="index.html#research" class="back-button">← Back to Main Page</a>
+            
+            <div class="system-overview">
+                <h2 style="font-size: 2.2rem; font-weight: 300; text-align: center; margin-bottom: 1rem; color: #1d1d1f;">System Architecture</h2>
+                <p style="text-align: center; font-size: 1.1rem; color: #6c757d; margin-bottom: 2rem;">Real-time motor assessment through five-stage processing pipeline</p>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-number">21</span>
+                        <div class="metric-label">Hand Landmarks</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">30</span>
+                        <div class="metric-label">FPS Processing</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">±2ms</span>
+                        <div class="metric-label">Precision</div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-number">100%</span>
+                        <div class="metric-label">Local</div>
+                    </div>
+                </div>
+
+                <div class="process-steps">
+                    <div class="process-step" data-step="1">
+                        <h4>Hand Detection</h4>
+                        <p>MediaPipe tracks 21 3D landmarks with sub-pixel accuracy</p>
+                    </div>
+                    <div class="process-step" data-step="2">
+                        <h4>Distance Calculation</h4>
+                        <p>3D Euclidean distance between thumb and index tips</p>
+                    </div>
+                    <div class="process-step" data-step="3">
+                        <h4>Signal Processing</h4>
+                        <p>Moving average smoothing and velocity analysis</p>
+                    </div>
+                </div>
+                
+                <div class="process-steps-center">
+                    <div class="process-step" data-step="4">
+                        <h4>Tap Detection</h4>
+                        <p>Multi-method algorithm with temporal filtering</p>
+                    </div>
+                    <div class="process-step" data-step="5">
+                        <h4>Clinical Metrics</h4>
+                        <p>Standardized motor assessment scores</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Signal Processing & Analysis</h2>
+                <p class="section-subtitle">How ActionCensus transforms hand tracking data into precise motor measurements</p>
+
+                <div class="two-column">
+                    <div class="algorithm-card">
+                        <h3>3D Distance Measurement</h3>
+                        <p>Real-time calculation between thumb and index finger tips:</p>
+                        
+                        <div class="equation">
+                            $$d = \sqrt{(x_2-x_1)^2 \cdot W^2 + (y_2-y_1)^2 \cdot H^2 + (z_2-z_1)^2 \cdot W^2 \cdot 0.5}$$
+                        </div>
+                        
+                        <p>Where $(x_1,y_1,z_1)$ and $(x_2,y_2,z_2)$ are normalized coordinates, $W$ and $H$ are image dimensions.</p>
+                    </div>
+
+                    <div class="algorithm-card">
+                        <h3>Hand Size Normalization</h3>
+                        <p>Individual variations normalized using wrist-to-MCP distance:</p>
+                        
+                        <div class="equation">
+                            $$d_{norm} = \frac{d_{raw}}{h_{size}} \times 100$$
+                            $$h_{size} = \sqrt{(x_{wrist} - x_{mcp})^2 \cdot W^2 + (y_{wrist} - y_{mcp})^2 \cdot H^2}$$
+                        </div>
+                        
+                        <p>Ensures consistent measurements across participants with different hand sizes.</p>
+                    </div>
+
+                    <div class="algorithm-card">
+                        <h3>Signal Smoothing</h3>
+                        <p>Moving average filter reduces noise while preserving dynamics:</p>
+                        
+                        <div class="equation">
+                            $$s[i] = \frac{1}{w} \sum_{k=i-\lfloor w/2 \rfloor}^{i+\lfloor w/2 \rfloor} d[k]$$
+                        </div>
+                        
+                        <p>Window size $w=3$ balances noise reduction with temporal resolution.</p>
+                    </div>
+
+                    <div class="algorithm-card">
+                        <h3>Velocity Analysis</h3>
+                        <p>Movement velocity computed via discrete differentiation:</p>
+                        
+                        <div class="equation">
+                            $$v[i] = \frac{s[i] - s[i-1]}{t[i] - t[i-1]}$$
+                        </div>
+                        
+                        <p>Enables zero-crossing detection for precise contact event identification.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Tap Detection Methods</h2>
+                <p class="section-subtitle">Four complementary algorithms ensure robust event detection</p>
+
+                <div class="detection-grid">
+                    <div class="method-card">
+                        <h4>State Change Detection</h4>
+                        <p>Monitors significant closing movements:</p>
+                        <div class="equation">$$\text{Event: } \delta d < -3 \text{ AND state} \neq \text{'closing'}$$</div>
+                        <p>Captures rapid finger approaches while filtering gradual movements.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h4>Local Minima Detection</h4>
+                        <p>Identifies closest finger positions:</p>
+                        <div class="equation">$$s[i-1] > s[i] < s[i+1] \text{ AND } s[i] < \theta_{close}$$</div>
+                        <p>Where $\theta_{close} = 30$ normalized units represents contact threshold.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h4>Velocity Zero-Crossing</h4>
+                        <p>Detects movement reversal at contact:</p>
+                        <div class="equation">$$v[i-1] < -0.5 \text{ AND } |v[i]| \leq 0.5$$</div>
+                        <p>Captures precise moment of movement reversal at tap contact point.</p>
+                    </div>
+
+                    <div class="method-card">
+                        <h4>Rhythmic Prediction</h4>
+                        <p>Predicts timing based on established patterns:</p>
+                        <div class="equation">$$t_{pred} = t_{last} + \mu_{interval} \pm 0.3\sigma$$</div>
+                        <p>Allows ±30% temporal tolerance for consistent tapping rhythms.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Temporal Filtering</h4>
+                    <p>All events filtered with 30ms minimum inter-tap interval to prevent false positives from hand tremor or processing artifacts.</p>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Clinical Metrics</h2>
+                <p class="section-subtitle">Standardized scores derived from tapping performance using neurological evaluation criteria</p>
+
+                <div class="clinical-grid">
+                    <div class="clinical-card">
+                        <h4>Tapping Frequency</h4>
+                        <div class="equation">$$f = \frac{1000}{\mu_{interval}} \text{ where } \mu_{interval} = \frac{1}{n} \sum_{i=1}^{n}(t_{i+1} - t_i)$$</div>
+                        <p>Primary motor speed metric in Hz. Healthy adults: 4-6 Hz.</p>
+                    </div>
+
+                    <div class="clinical-card">
+                        <h4>Amplitude Analysis</h4>
+                        <div class="equation">$$A = \max(d_{norm}[t_i : t_{i+1}])$$</div>
+                        <p>Maximum finger separation per tap cycle. Reduced amplitude indicates bradykinesia.</p>
+                    </div>
+
+                    <div class="clinical-card">
+                        <h4>Rhythm Variability</h4>
+                        <div class="equation">$$CV = \frac{\sigma_{interval}}{\mu_{interval}} \times 100\%$$</div>
+                        <p>Coefficient of variation quantifies timing consistency. Higher CV indicates irregular rhythm.</p>
+                    </div>
+
+                    <div class="clinical-card">
+                        <h4>Amplitude Decrement</h4>
+                        <div class="equation">$$\text{Decrement} = \frac{A_{initial} - A_{final}}{A_{initial}} \times 100\%$$</div>
+                        <p>Progressive amplitude reduction. >15% may indicate fatigue or motor sequence effects.</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Clinical Validation</h4>
+                    <p>All metrics validated against Ruff & Parker (1993) normative data and UPDRS motor examination criteria for established clinical correlation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: #2c3e50; color: white; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;">&copy; 2024 ActionCensus Research Project. All rights reserved.</p>
+            <p style="font-size: 1rem; opacity: 0.8;">
+                <a href="index.html" style="color: #3498db; text-decoration: none;">← Return to Main Site</a>
+            </p>
+        </div>
+    </footer>
+</body>
+  </html>
