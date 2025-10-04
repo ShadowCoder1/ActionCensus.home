@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ActionCensus: Scalable Webcam-Based Motor Assessment</title>
+    <title>Download - ActionCensus</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -16,18 +16,13 @@
             font-family: 'Source Sans Pro', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
-            background-color: #fff;
+            background-color: #fafafa;
         }
 
         .header {
             background-color: #2c3e50;
             color: white;
             padding: 1rem 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
@@ -64,41 +59,70 @@
             color: #3498db;
         }
 
-        .main-content {
-            margin-top: 80px;
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 3rem 2rem;
         }
 
-        .hero-title {
-            font-size: 3rem;
+        h1 {
+            font-size: 2.5rem;
             font-weight: 300;
             margin-bottom: 1rem;
-            line-height: 1.2;
+            color: #2c3e50;
         }
 
-        .hero-subtitle {
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 3rem 0 1.5rem 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
             font-size: 1.3rem;
-            font-weight: 300;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: #34495e;
         }
 
-        .demo-button {
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .intro {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #3498db;
+        }
+
+        .method-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid #e1e5e9;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            line-height: 1.5;
+        }
+
+        .download-button {
             display: inline-block;
             background: #3498db;
             color: white;
@@ -107,572 +131,273 @@
             border-radius: 4px;
             font-weight: 600;
             transition: background 0.3s ease;
-            margin: 0 0.5rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
         }
 
-        .demo-button:hover {
+        .download-button:hover {
             background: #2980b9;
         }
 
-        .demo-button.secondary {
-            background: transparent;
-            border: 2px solid #3498db;
+        .download-button.github {
+            background: #24292e;
         }
 
-        .demo-button.secondary:hover {
+        .download-button.github:hover {
+            background: #1a1e21;
+        }
+
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .success {
+            background: #d4edda;
+            border: 1px solid #28a745;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        ol, ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .step-number {
+            display: inline-block;
             background: #3498db;
-        }
-
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: #7f8c8d;
-            margin-bottom: 3rem;
-            line-height: 1.6;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-item {
-            padding: 2rem;
-            border: 1px solid #ecf0f1;
-            border-radius: 4px;
-            background: #fff;
-        }
-
-        .feature-item h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .feature-item p {
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .research-section {
-            background: #f8f9fa;
-        }
-
-        .research-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-            margin-top: 2rem;
-        }
-
-        .research-content {
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-
-        .research-content h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-
-        .research-content ul {
-            margin: 1.5rem 0;
-            padding-left: 2rem;
-        }
-
-        .research-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        .research-sidebar {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .stat-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 4px;
-            text-align: center;
-            border: 1px solid #ecf0f1;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #3498db;
-            display: block;
-        }
-
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .compatibility-section {
-            background: white;
-        }
-
-        .browser-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .browser-item {
-            text-align: center;
-            padding: 1.5rem;
-            border: 1px solid #ecf0f1;
-            border-radius: 4px;
-        }
-
-        .browser-item h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .documentation-section {
-            background: #f8f9fa;
-        }
-
-        .code-block {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 2rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            margin: 2rem 0;
-        }
-
-        .code-comment {
-            color: #95a5a6;
-        }
-
-        .code-string {
-            color: #e74c3c;
-        }
-
-        .code-keyword {
-            color: #3498db;
-        }
-
-        .footer {
-            background: #2c3e50;
             color: white;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
-            font-size: 1.1rem;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 0.5rem;
             font-weight: 600;
-            margin-bottom: 1rem;
-            color: #3498db;
-        }
-
-        .footer-section a {
-            color: #bdc3c7;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #34495e;
-            padding-top: 1rem;
-            text-align: center;
-            color: #95a5a6;
-            font-size: 0.9rem;
-        }
-
-        .demo-embed {
-            background: white;
-            border: 1px solid #ecf0f1;
-            border-radius: 4px;
-            padding: 3rem;
-            text-align: center;
-            margin: 2rem 0;
         }
 
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
+            .container {
+                padding: 2rem 1rem;
             }
 
-            .research-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            h1 {
+                font-size: 2rem;
+            }
+
+            .code-block {
+                font-size: 0.85rem;
             }
 
             .nav-links {
                 display: none;
             }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .highlight {
-            background-color: #f39c12;
-            color: white;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-        }
-
-        .citation-box {
-            background: #ecf0f1;
-            border-left: 4px solid #3498db;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="nav-container">
-            <a href="#" class="logo">ActionCensus</a>
+            <a href="index.html" class="logo">ActionCensus</a>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#compatibility">Compatibility</a></li>
-                    <li><a href="#documentation">Documentation</a></li>
-                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="download.html">Download</a></li>
+                    <li><a href="technical.html">Documentation</a></li>
+                    <li><a href="https://github.com/ShadowCoder1/action-census">GitHub</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="main-content">
-        <section id="home" class="hero-section">
-            <div class="container">
-                <h1 class="hero-title">ActionCensus: Scalable Webcam-Based Motor Assessment</h1>
-                <p class="hero-subtitle">
-                    We introduce ActionCensus, an online motor assessment tool that uses common webcams to infer finger tapping performance 
-                    in real time. The system self-calibrates through MediaPipe hand tracking and provides clinical-grade motor assessment 
-                    without specialized equipment.
-                </p>
-                <div>
-                    <a href="https://actioncensus.org/" class="demo-button">Try Live Demo</a>
-                    <a href="#research" class="demo-button secondary">View Research</a>
-                </div>
-            </div>
-        </section>
+    <div class="container">
+        <h1>Download & Installation</h1>
+        
+        <div class="intro">
+            <p style="font-size: 1.1rem; margin: 0;">
+                ActionCensus is a JavaScript library for webcam-based motor assessment. Choose the installation method that works best for your project.
+            </p>
+        </div>
 
-        <section id="features" class="section">
-            <div class="container">
-                <h2 class="section-title">System Architecture</h2>
-                <p class="section-subtitle">
-                    ActionCensus has two key components: a MediaPipe-based hand detector that tracks finger landmarks, 
-                    and a motor assessment engine using signal processing to quantify tapping performance.
-                </p>
-                
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <h3>Real-time Hand Tracking</h3>
-                        <p>Utilizes Google's MediaPipe framework for robust hand landmark detection. The system tracks 21 hand landmarks at 30fps, providing precise finger position data for motor analysis.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Signal Processing Pipeline</h3>
-                        <p>Advanced algorithms detect finger tapping events through distance analysis, velocity calculations, and multi-method peak detection with temporal filtering for accuracy.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Clinical Metrics</h3>
-                        <p>Generates standardized motor assessment scores, including tapping frequency, amplitude, rhythm variability, and motor coordination.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Browser-based Implementation</h3>
-                        <p>Runs entirely in web browsers using WebRTC and JavaScript. No server-side processing required, ensuring privacy and reducing latency for real-time assessment.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Cross-platform Compatibility</h3>
-                        <p>Compatible with desktop and mobile devices across major operating systems. Optimized performance algorithms adapt to device capabilities automatically.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Data Export & Analysis</h3>
-                        <p>Comprehensive data export including raw landmarks and processed signals.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <h2>Quick Links</h2>
+        <div style="margin: 1.5rem 0;">
+            <a href="https://cdn.jsdelivr.net/npm/actioncensus@latest/dist/actioncensus.min.js" class="download-button" download>Download Latest (13.2 KB)</a>
+            <a href="https://github.com/ShadowCoder1/action-census" class="download-button github" target="_blank">View on GitHub</a>
+            <a href="https://www.npmjs.com/package/actioncensus" class="download-button" target="_blank" style="background: #cb3837;">View on npm</a>
+        </div>
 
-        <section id="research" class="section research-section">
-            <div class="container">
-                <h2 class="section-title">Research Framework</h2>
-                <p class="section-subtitle">
-                    ActionCensus is designed for rigorous scientific validation with planned studies for population normative data and clinical correlation analysis.
-                </p>
-                
-                <div class="research-grid">
-                                    <div class="research-content">
-                                        <h3>Clinical Research Potential</h3>
-                                        <p>
-                                            Motor assessment is critical in neurological evaluation, yet traditional methods require specialized equipment 
-                                            limiting accessibility. ActionCensus addresses this gap by providing a framework for validated motor assessment through standard webcams.
-                                        </p>
-                                        <p>
-                                            The system is designed to enable research studies that will establish:
-                                        </p>
-                                        <ul>
-                                            <li>Correlation with established clinical finger tapping measures</li>
-                                            <li>Test-retest reliability across sessions and devices</li>
-                                            <li>Population normative data across age and demographic groups</li>
-                                            <li>Sensitivity to motor coordination changes over time</li>
-                                        </ul>
-                                    </div>
-                                    
-                                    <div class="research-sidebar">
-                                        <div class="stats-grid">
-                                            <div class="stat-item">
-                                                <span class="stat-number">21</span>
-                                                <div class="stat-label">Hand Landmarks Tracked</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-number">2min</span>
-                                                <div class="stat-label">Total Assessment Time</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-number">6</span>
-                                                <div class="stat-label">Trials Per Session</div>
-                                            </div>
-                                            <div class="stat-item">
-                                                <span class="stat-number">100%</span>
-                                                <div class="stat-label">Local Processing</div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div style="margin-top: 2rem; text-align: center;">
-                                            <a href="technical.html" class="demo-button">View Technical Details</a>
-                                        </div>
-                                    </div>
-                </div>
-            </div>
-        </section>
+        <h2>Installation Methods</h2>
 
-        <section id="compatibility" class="section compatibility-section">
-            <div class="container">
-                <h2 class="section-title">Browser Compatibility</h2>
-                <p class="section-subtitle">
-                    ActionCensus is compatible with all modern browsers that support WebRTC and MediaPipe. 
-                    Over 95% of current browser installations worldwide support the required APIs.
-                </p>
-                
-                <div class="browser-grid">
-                    <div class="browser-item">
-                        <svg width="48" height="48" viewBox="0 0 24 24" style="margin-bottom: 1rem;">
-                            <circle cx="12" cy="12" r="10" fill="#4285f4"/>
-                            <circle cx="12" cy="12" r="7" fill="#ea4335"/>
-                            <circle cx="12" cy="12" r="4" fill="#fbbc05"/>
-                            <circle cx="12" cy="12" r="1.5" fill="#34a853"/>
-                        </svg>
-                        <h4>Chrome</h4>
-                        <p>Version 80+</p>
-                        <p>Full Support</p>
-                    </div>
-                    <div class="browser-item">
-                        <svg width="48" height="48" viewBox="0 0 24 24" style="margin-bottom: 1rem;">
-                            <circle cx="12" cy="12" r="10" fill="#FF7139"/>
-                            <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" fill="#FF7139"/>
-                            <path d="M8.5 8.5c1.5-1.5 4-1.5 5.5 0l2 2c1.5 1.5 1.5 4 0 5.5s-4 1.5-5.5 0l-2-2c-1.5-1.5-1.5-4 0-5.5z" fill="#FFCC02"/>
-                        </svg>
-                        <h4>Firefox</h4>
-                        <p>Version 75+</p>
-                        <p>Full Support</p>
-                    </div>
-                    <div class="browser-item">
-                        <svg width="48" height="48" viewBox="0 0 24 24" style="margin-bottom: 1rem;">
-                            <circle cx="12" cy="12" r="10" fill="#000"/>
-                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" fill="#007AFF"/>
-                            <circle cx="12" cy="12" r="6" fill="#007AFF"/>
-                        </svg>
-                        <h4>Safari</h4>
-                        <p>Version 14+</p>
-                        <p>Full Support</p>
-                    </div>
-                    <div class="browser-item">
-                        <svg width="48" height="48" viewBox="0 0 24 24" style="margin-bottom: 1rem;">
-                            <circle cx="12" cy="12" r="10" fill="#0078d7"/>
-                            <path d="M12 2.5c-5.25 0-9.5 4.25-9.5 9.5s4.25 9.5 9.5 9.5 9.5-4.25 9.5-9.5-4.25-9.5-9.5-9.5zm0 16c-3.58 0-6.5-2.92-6.5-6.5s2.92-6.5 6.5-6.5 6.5 2.92 6.5 6.5-2.92 6.5-6.5 6.5z" fill="#fff"/>
-                            <path d="M8 12l3 3 5-5" stroke="#0078d7" stroke-width="2" fill="none"/>
-                        </svg>
-                        <h4>Edge</h4>
-                        <p>Version 80+</p>
-                        <p>Full Support</p>
-                    </div>
-                    <div class="browser-item">
-                        <svg width="48" height="48" viewBox="0 0 24 24" style="margin-bottom: 1rem;">
-                            <circle cx="12" cy="12" r="10" fill="#5a67d8"/>
-                            <path d="M12 4v8l6 6" stroke="#fff" stroke-width="2" fill="none"/>
-                            <circle cx="12" cy="12" r="2" fill="#fff"/>
-                        </svg>
-                        <h4>Mobile Browsers</h4>
-                        <p>iOS Safari 14+</p>
-                        <p>Android Chrome 80+</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Method 1: CDN -->
+        <div class="method-box">
+            <h3><span class="step-number">1</span>CDN (Easiest - Recommended for Beginners)</h3>
+            <p>Include ActionCensus directly in your HTML file. No installation required.</p>
 
-        <section id="documentation" class="section documentation-section">
-            <div class="container">
-                <h2 class="section-title">Integration & Documentation</h2>
-                <p class="section-subtitle">
-                    ActionCensus can be easily integrated into research platforms, clinical systems, and web applications 
-                    with minimal setup requirements.
-                </p>
+            <p><strong>Step 1:</strong> Add these script tags to your HTML file:</p>
+            <div class="code-block">&lt;!-- Required: MediaPipe Hands --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"&gt;&lt;/script&gt;
 
-                <h3>Basic Integration</h3>
-                <div class="code-block">
-<span class="code-comment">// Include ActionCensus library</span>
-&lt;<span class="code-keyword">script</span> src=<span class="code-string">"https://actioncensus.org/js/actioncensus.min.js"</span>&gt;&lt;/<span class="code-keyword">script</span>&gt;
+&lt;!-- ActionCensus Library --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/actioncensus@latest/dist/actioncensus.min.js"&gt;&lt;/script&gt;</div>
 
-<span class="code-comment">// Initialize assessment</span>
-<span class="code-keyword">const</span> actionCensus = <span class="code-keyword">new</span> ActionCensus({
-    containerId: <span class="code-string">'assessment-container'</span>,
-    trialDuration: <span class="code-string">10000</span>, <span class="code-comment">// 10 seconds</span>
+            <p><strong>Step 2:</strong> Use ActionCensus in your code:</p>
+            <div class="code-block">&lt;script&gt;
+  const assessment = new ActionCensus({
+    trialDuration: 10000,
     onComplete: (results) => {
-        console.log(<span class="code-string">'Assessment results:'</span>, results);
-        <span class="code-comment">// Process clinical metrics</span>
-        exportData(results.clinicalMetrics);
+      console.log('Taps:', results.tapCount);
+      console.log('Frequency:', results.frequency.toFixed(2), 'Hz');
     }
-});
+  });
 
-<span class="code-comment">// Start motor assessment</span>
-actionCensus.startAssessment();
-                </div>
+  assessment.init().then(() => {
+    assessment.startTrial('right');
+  });
+&lt;/script&gt;</div>
 
-                <h3>Research Protocol</h3>
-                <p>
-                    For research applications, we recommend the following standardized protocol to ensure 
-                    reproducible results and compatibility with existing literature:
-                </p>
-                <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li>6 trials alternating between dominant and non-dominant hands</li>
-                    <li>10-second assessment duration per trial</li>
-                    <li>Controlled lighting conditions (indoor lighting, face clearly visible)</li>
-                    <li>Standardized instructions and practice trial</li>
-                    <li>Rest periods between trials to prevent fatigue</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="demo" class="section">
-            <div class="container">
-                <h2 class="section-title">Live Demonstration</h2>
-                <p class="section-subtitle">
-                    Experience ActionCensus motor assessment directly in your browser. The demonstration includes 
-                    the complete assessment protocol with real-time feedback and results analysis.
-                </p>
-                
-                <div class="demo-embed">
-                    <h3>Webcam-based Motor Assessment</h3>
-                    <p>Click below to start the assessment demonstration. You will need to grant camera permissions.</p>
-                    <a href="https://actioncensus.org/" class="demo-button" style="margin-top: 1rem;">
-                        Launch Assessment Demo
-                    </a>
-                    <p style="margin-top: 1rem; color: #7f8c8d; font-size: 0.9rem;">
-                        No registration required • Approximately 3 minutes • All processing done locally
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h4>ActionCensus Project</h4>
-                    <p style="color: #bdc3c7; line-height: 1.6;">
-                        Advancing accessible motor assessment through webcam-based technology and rigorous scientific validation.
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4>Research</h4>
-                    <a href="#">Publications</a>
-                    <a href="#">Dataset Access</a>
-                    <a href="#">Collaboration</a>
-                    <a href="#">Citation Guidelines</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Documentation</h4>
-                    <a href="#">API Reference</a>
-                    <a href="#">Integration Guide</a>
-                    <a href="#">Research Protocol</a>
-                    <a href="#">Source Code</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact</h4>
-                    <a href="mailto:research@ActionCensus.org">physical.intelligence.lab@gmail.com</a>
-                    <a href="#">Technical Support</a>
-                    <a href="#">Academic Partnerships</a>
-                    <a href="#">Media Inquiries</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 ActionCensus Research Project. All rights reserved.</p>
+            <div class="success">
+                <strong>✓ That's it!</strong> Your motor assessment is ready to use.
             </div>
         </div>
-    </footer>
 
-    <script>
-        // Smooth scrolling navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+        <!-- Method 2: npm -->
+        <div class="method-box">
+            <h3><span class="step-number">2</span>npm (For Node.js Projects)</h3>
+            <p>Install ActionCensus as a package in your JavaScript project.</p>
+
+            <p><strong>Step 1:</strong> Install via npm:</p>
+            <div class="code-block">npm install actioncensus</div>
+
+            <p><strong>Step 2:</strong> Import and use in your code:</p>
+            <div class="code-block">import ActionCensus from 'actioncensus';
+
+const assessment = new ActionCensus({
+  trialDuration: 10000,
+  onComplete: (results) => {
+    console.log(results);
+  }
+});
+
+await assessment.init();
+await assessment.startTrial('right');</div>
+
+            <div class="note">
+                <strong>Note:</strong> You'll still need to include MediaPipe Hands separately. See the full documentation for details.
+            </div>
+        </div>
+
+        <!-- Method 3: Download -->
+        <div class="method-box">
+            <h3><span class="step-number">3</span>Direct Download</h3>
+            <p>Download the library file and host it yourself.</p>
+
+            <p><strong>Step 1:</strong> Download the library:</p>
+            <ul>
+                <li><a href="https://cdn.jsdelivr.net/npm/actioncensus@latest/dist/actioncensus.min.js" download>actioncensus.min.js</a> (minified, 13.2 KB)</li>
+                <li><a href="https://raw.githubusercontent.com/ShadowCoder1/action-census/main/src/actioncensus.js" download>actioncensus.js</a> (source code)</li>
+            </ul>
+
+            <p><strong>Step 2:</strong> Include in your HTML:</p>
+            <div class="code-block">&lt;script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/actioncensus.min.js"&gt;&lt;/script&gt;</div>
+        </div>
+
+        <!-- Method 4: GitHub -->
+        <div class="method-box">
+            <h3><span class="step-number">4</span>Clone from GitHub</h3>
+            <p>Get the full source code and examples.</p>
+
+            <div class="code-block">git clone https://github.com/ShadowCoder1/action-census.git
+cd action-census</div>
+
+            <p>The library files are in:</p>
+            <ul>
+                <li><code>src/actioncensus.js</code> - Source code</li>
+                <li><code>dist/actioncensus.min.js</code> - Built library</li>
+                <li><code>examples/</code> - Working examples</li>
+            </ul>
+        </div>
+
+        <h2>Complete Working Example</h2>
+        <p>Here's a complete HTML file you can copy and paste to get started:</p>
+
+        <div class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;ActionCensus Test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;ActionCensus Motor Assessment&lt;/h1&gt;
+  &lt;button onclick="start()"&gt;Start Assessment&lt;/button&gt;
+  &lt;div id="video-container"&gt;&lt;/div&gt;
+  &lt;div id="results"&gt;&lt;/div&gt;
+
+  &lt;!-- Include libraries --&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"&gt;&lt;/script&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/actioncensus@latest/dist/actioncensus.min.js"&gt;&lt;/script&gt;
+
+  &lt;script&gt;
+    let assessment;
+
+    async function init() {
+      assessment = new ActionCensus({
+        onComplete: (results) => {
+          document.getElementById('results').innerHTML = `
+            &lt;h2&gt;Results&lt;/h2&gt;
+            &lt;p&gt;Taps: ${results.tapCount}&lt;/p&gt;
+            &lt;p&gt;Frequency: ${results.frequency.toFixed(2)} Hz&lt;/p&gt;
+          `;
+        }
+      });
+
+      await assessment.init();
+      const { canvas } = assessment.getElements();
+      document.getElementById('video-container').appendChild(canvas);
+    }
+
+    async function start() {
+      await assessment.startTrial('right');
+    }
+
+    init();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+
+        <div class="success">
+            <strong>Copy this code</strong>, save it as <code>test.html</code>, open it in your browser, and click "Start Assessment"!
+        </div>
+
+        <h2>Browser Requirements</h2>
+        <ul>
+            <li>Chrome 80+, Firefox 75+, Safari 14+, or Edge 80+</li>
+            <li>Webcam access</li>
+            <li>HTTPS connection (required for camera access in production)</li>
+        </ul>
+
+        <h2>Need Help?</h2>
+        <p>If you encounter any issues:</p>
+        <ul>
+            <li>Check the <a href="technical.html">Technical Documentation</a> for detailed API reference</li>
+            <li>View <a href="https://github.com/ShadowCoder1/action-census/tree/main/examples">working examples</a> on GitHub</li>
+            <li>Open an issue on <a href="https://github.com/ShadowCoder1/action-census/issues">GitHub</a></li>
+        </ul>
+
+        <h2>Citation</h2>
+        <p>If you use ActionCensus in research, please cite:</p>
+        <div class="code-block">@software{actioncensus2024,
+  title = {ActionCensus: Webcam-based Motor Assessment},
+  author = {ActionCensus Research Project},
+  year = {2024},
+  url = {https://actioncensus.org}
+}</div>
+    </div>
 </body>
 </html>
